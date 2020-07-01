@@ -13,7 +13,7 @@ public class GoogleSteps {
 
     @Given("Google page is opened")
     public void googlePageIsOpened() {
-        driver.get("www.google.com");
+        driver.get("https://www.google.com/");
     }
 
     @When("User enters search request {string}")
