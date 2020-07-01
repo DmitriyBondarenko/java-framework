@@ -17,10 +17,10 @@
     </build>
 
     <properties>
-    <selenium.version>3.141.59</selenium.version>
-    <cucummber.version>6.1.2</cucummber.version>
-    <assertj.version>3.16.1</assertj.version>
-    <webdrivermanager.version>4.0.0</webdrivermanager.version>
+        <selenium.version>3.141.59</selenium.version>
+        <cucummber.version>6.1.1</cucummber.version>
+        <assertj.version>3.16.1</assertj.version>
+        <webdrivermanager.version>4.0.0</webdrivermanager.version>
     </properties>
 
     <groupId>techstack-framework</groupId>
@@ -39,16 +39,22 @@
             <version>${cucummber.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucummber.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
