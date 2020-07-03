@@ -21,6 +21,7 @@
         <cucummber.version>6.1.1</cucummber.version>
         <assertj.version>3.16.1</assertj.version>
         <webdrivermanager.version>4.0.0</webdrivermanager.version>
+        <cucummber-picocontainer.version>6.1.1</cucummber-picocontainer.version>
     </properties>
 
     <groupId>techstack-framework</groupId>
@@ -53,7 +54,7 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
-            <version>${cucummber.version}</version>
+            <version>${cucummber-picocontainer.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
