@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.techstack.dto.User;
 import io.techstack.pages.GooglePage;
 import io.techstack.providers.driver.DriverProvider;
 import io.techstack.providers.driver.WebDriverWrapper;
@@ -14,9 +15,11 @@ import io.techstack.providers.driver.WebDriverWrapper;
 public class GoogleSteps {
     private final WebDriverWrapper driver;
     private final GooglePage googlePage;
+    private final User user;
 
-    public GoogleSteps(DriverProvider driverProvider) {
+    public GoogleSteps(DriverProvider driverProvider, User user) {
         this.driver = driverProvider.getInstance();
+        this.user = user;
         googlePage = new GooglePage(driver);
     }
 
@@ -27,14 +30,14 @@ public class GoogleSteps {
 
     @When("User enters search request {string}")
     public void userEntersSearchRequestAutomation(String string) {
-        driver.waitForElement(this.driver, googlePage.searchInput);
+        driver.waitForElement(googlePage.searchInput);
         googlePage.searchInput.sendKeys(string);
         googlePage.searchInput.sendKeys(Keys.ENTER);
     }
 
     @Then("Results page is opened")
     public void resultsPageIsOpened() {
-        driver.waitForElements(this.driver, googlePage.searchResults);
+        driver.waitForElements(googlePage.searchResults);
         int results = googlePage.searchResults.size();
         Assertions.assertThat(results).as("Search results are not valid").isGreaterThan(5);
     }
