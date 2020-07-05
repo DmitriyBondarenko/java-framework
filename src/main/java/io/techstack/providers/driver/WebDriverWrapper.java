@@ -17,7 +17,9 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.List;
 import java.util.Set;
 
-public class WebDriverWrapper implements WebDriver, JavascriptExecutor, TakesScreenshot, HasCapabilities {
+import io.techstack.utils.IWait;
+
+public class WebDriverWrapper implements WebDriver, IWait, JavascriptExecutor, TakesScreenshot, HasCapabilities {
     private final WebDriver webDriver;
 
     private final String uniqueInstanceMarker = RandomStringUtils.randomAlphabetic(20);

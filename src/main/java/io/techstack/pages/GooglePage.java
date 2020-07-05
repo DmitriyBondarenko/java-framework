@@ -18,7 +18,7 @@ public class GooglePage extends AbstractPage {
     public WebElement searchInput;
 
     @FindBy(xpath = ".//h3[contains(text(), 'Automation')]")
-    public List<WebDriver> searchResults;
+    public List<WebElement> searchResults;
 
     public void openGoogle() {
         driver.get("https://www.google.com/");

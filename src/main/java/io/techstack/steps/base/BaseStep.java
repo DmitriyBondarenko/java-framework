@@ -13,7 +13,7 @@ public class BaseStep {
 
     @Before
     public void setUp() {
-        driverProvider.getInstance();
+       driverProvider.getInstance();
     }
 
     @After

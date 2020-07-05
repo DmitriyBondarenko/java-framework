@@ -8,13 +8,14 @@ public class DriverFactory {
 
     private DriverFactory() {}
 
-    public static WebDriver getDriver(String browser) {
+    public static WebDriverWrapper getDriver(String browser) {
         if ("FIREFOX".equalsIgnoreCase(browser)) {
-            return new FirefoxDriver();
+            return new WebDriverWrapper(new FirefoxDriver());
         } else if ("CHROME".equalsIgnoreCase(browser)) {
-            return new ChromeDriver();
+            return new WebDriverWrapper(new ChromeDriver());
         } else {
             throw new IllegalArgumentException("Invalid browser name: " + browser);
         }
     }
 }
+

@@ -1,7 +1,5 @@
 package io.techstack.providers.driver;
 
-import org.openqa.selenium.WebDriver;
-
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -12,14 +10,14 @@ import io.techstack.properties.PropertyReader;
 public class DriverProvider implements IDriverProvider {
 
     private static final String BROWSER;
-    private WebDriver driver;
+    private WebDriverWrapper driver;
 
     static {
         BROWSER = PropertyReader.getProperty("target.browser");
     }
 
     @Override
-    public WebDriver getInstance() {
+    public WebDriverWrapper getInstance() {
         return Optional.ofNullable(driver).orElseGet(this::createDriverInstance);
     }
 
@@ -31,7 +29,7 @@ public class DriverProvider implements IDriverProvider {
         }
     }
 
-    private WebDriver createDriverInstance() {
+    private WebDriverWrapper createDriverInstance() {
       switch (BROWSER) {
             case "chrome" -> WebDriverManager.chromedriver().setup();
             case "firefox" -> WebDriverManager.firefoxdriver().setup();
