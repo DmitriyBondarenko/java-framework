@@ -1,7 +1,6 @@
 package io.techstack.steps;
 
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import io.cucumber.java.en.Given;
@@ -11,6 +10,7 @@ import io.techstack.dto.User;
 import io.techstack.pages.GooglePage;
 import io.techstack.providers.driver.DriverProvider;
 import io.techstack.providers.driver.WebDriverWrapper;
+import io.techstack.utils.Api;
 
 public class GoogleSteps {
     private final WebDriverWrapper driver;
@@ -39,6 +39,9 @@ public class GoogleSteps {
     public void resultsPageIsOpened() {
         driver.waitForElements(googlePage.searchResults);
         int results = googlePage.searchResults.size();
+        Api.getRequest("/users/2");
+        User user = Api.addUser("/users", new User().setName("Sanya").setJob("combiner"));
+        System.out.println(user.toString());
         Assertions.assertThat(results).as("Search results are not valid").isGreaterThan(5);
     }
 }
