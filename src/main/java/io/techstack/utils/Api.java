@@ -13,27 +13,35 @@ import io.techstack.properties.PropertyReader;
 
 public class Api {
 
-    private static RequestSpecification requestSpecification;
+    private static final RequestSpecification requestSpecification;
 
     static {
         RestAssured.baseURI = PropertyReader.getProperty("base.uri");
         requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .addFilter(new ResponseLoggingFilter())
-                .addFilter(new RequestLoggingFilter()).build();
+                .addFilter(new RequestLoggingFilter())
+                .build();
     }
 
     public static void getRequest(String endpoint) {
         given().spec(requestSpecification)
-                .request().get(endpoint)
-                .then().assertThat().statusCode(200);
+               .request()
+               .get(endpoint)
+               .then()
+               .assertThat()
+               .statusCode(200);
     }
 
     public static User addUser(String endpoint, User user) {
         return given().spec(requestSpecification)
-                .body(user)
-                .request().post(endpoint)
-                .then().assertThat().statusCode(201)
-                .extract().as(User.class);
+                      .body(user)
+                      .request()
+                      .post(endpoint)
+                      .then()
+                      .assertThat()
+                      .statusCode(201)
+                      .extract()
+                      .as(User.class);
     }
 }

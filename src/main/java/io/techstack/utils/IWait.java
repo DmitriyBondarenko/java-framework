@@ -15,10 +15,6 @@ public interface IWait extends WebDriver {
         new WebDriverWait(IWait.this, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOf(element));
     }
 
-    default void waitForElement(By by) {
-        new WebDriverWait(IWait.this, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOfElementLocated(by));
-    }
-
     default void waitForElements(List<WebElement> elements) {
         new WebDriverWait(IWait.this, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOfAllElements(elements));
     }
