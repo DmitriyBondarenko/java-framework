@@ -10,7 +10,6 @@ import io.cucumber.java.en.When;
 import io.techstack.pages.GooglePage;
 import io.techstack.providers.driver.DriverProvider;
 
-
 public class GoogleSteps {
     private WebDriver driver;
     private final GooglePage googlePage;
