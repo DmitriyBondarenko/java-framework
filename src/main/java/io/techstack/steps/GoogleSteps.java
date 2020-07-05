@@ -9,7 +9,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.techstack.providers.driver.DriverProvider;
-import io.techstack.steps.base.BaseStep;
 
 public class GoogleSteps {
     private final WebDriver driver;
