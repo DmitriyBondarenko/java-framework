@@ -3,15 +3,16 @@ Feature: TestFeature
   Background:
     Given Google page is opened
 
-  Scenario: Open google page
-    When User enters search request 'automation'
-    Then Results page is opened
+  Scenario: CheckSimpleSearch
+    When User enters search request 'Automation'
+    Then Results page with 'Automation' is displayed
 
-  Scenario Outline: Different search requests
+  Scenario Outline: CheckDifferentSearchResults
     When User enters search request '<request>'
-    Then Results page is opened
+    Then Results page with '<request>' is displayed
 
     Examples:
       | request    |
-      | combiner   |
-      | automation |
+      | Combiner   |
+      | Automation |
+      | Selenium   |

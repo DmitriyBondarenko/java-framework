@@ -2,18 +2,22 @@ package io.techstack.providers.driver;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.techstack.properties.PropertyReader;
+import io.techstack.utils.BrowserFactory;
 
+/**
+ * This class provides methods to interact with WedDriver instance
+ */
 public class DriverProvider implements IDriverProvider {
-
     private static final String BROWSER;
+    private static final String REMOTE_DRIVER;
     private WebDriverWrapper driver;
 
     static {
         BROWSER = PropertyReader.getProperty("target.browser");
+        REMOTE_DRIVER = PropertyReader.getProperty("remote.driver");
     }
 
     @Override
@@ -35,9 +39,8 @@ public class DriverProvider implements IDriverProvider {
             case "firefox" -> WebDriverManager.firefoxdriver().setup();
             default -> throw new RuntimeException("Incorrect browser type" + BROWSER);
         }
-        driver = DriverFactory.getDriver(BROWSER);
+        driver = BrowserFactory.getDriver(BROWSER);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return driver;
     }
 }

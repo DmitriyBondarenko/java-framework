@@ -14,7 +14,7 @@ public class PropertyReader {
 
             String property = props.getProperty(name);
             if (property == null) {
-                throw new IllegalArgumentException("Could not read property with key " + name);
+                throw new IllegalArgumentException("Could not read property with key: " + name);
             }
             return property;
         } catch (IOException e) {

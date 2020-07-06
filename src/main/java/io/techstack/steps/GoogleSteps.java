@@ -10,7 +10,7 @@ import io.techstack.dto.User;
 import io.techstack.pages.GooglePage;
 import io.techstack.providers.driver.DriverProvider;
 import io.techstack.providers.driver.WebDriverWrapper;
-import io.techstack.utils.Api;
+import io.techstack.utils.ApiClient;
 
 public class GoogleSteps {
     private final WebDriverWrapper driver;
@@ -35,13 +35,19 @@ public class GoogleSteps {
         googlePage.searchInput.sendKeys(Keys.ENTER);
     }
 
-    @Then("Results page is opened")
-    public void resultsPageIsOpened() {
-        driver.waitForElements(googlePage.searchResults);
-        int results = googlePage.searchResults.size();
-        Api.getRequest("/users/2");
-        User user = Api.addUser("/users", new User().setName("Sanya").setJob("combiner"));
+    @Then("Results page with {string} is displayed")
+    public void resultsPageWithRequestIsDisplayed(String string) {
+        // =============== API USAGE =========================
+        User requestUser = new User().setName("Sanya")
+                                     .setJob("combiner");
+
+        ApiClient.getRequest("/users/2");
+        User user = ApiClient.addUser("/users", requestUser);
         System.out.println(user.toString());
+        // ===================================================
+
+        int results = driver.waitForElements(googlePage.getSearchResults(string)).size();
+
         Assertions.assertThat(results).as("Search results are not valid").isGreaterThan(5);
     }
 }

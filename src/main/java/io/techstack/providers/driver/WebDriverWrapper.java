@@ -17,7 +17,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.List;
 import java.util.Set;
 
-import io.techstack.utils.IWait;
+import io.techstack.utils.interfaces.IWait;
 
 public class WebDriverWrapper implements WebDriver, IWait, JavascriptExecutor, TakesScreenshot, HasCapabilities {
     private final WebDriver webDriver;

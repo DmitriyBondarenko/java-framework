@@ -40,7 +40,7 @@ public class User {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("User name: ", name)
-                .add("Password: ", job)
+                .add("User job: ", job)
                 .toString();
     }
 }

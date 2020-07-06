@@ -1,5 +1,6 @@
 package io.techstack.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,5 +23,9 @@ public class GooglePage extends AbstractPage {
 
     public void openGoogle() {
         driver.get("https://www.google.com/");
+    }
+
+    public List<WebElement> getSearchResults(String request) {
+       return driver.findElements(By.xpath(String.format(".//h3[contains(text(), '%s')]", request)));
     }
 }

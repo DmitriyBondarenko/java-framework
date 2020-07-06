@@ -1,12 +1,17 @@
-package io.techstack.providers.driver;
+package io.techstack.utils;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class DriverFactory {
+import io.techstack.providers.driver.WebDriverWrapper;
 
-    private DriverFactory() {}
+/**
+ * This class provides ability to create different Drivers objects
+ * Available drivers to create: FirefoxDriver, ChromeDriver
+ */
+public class BrowserFactory {
+
+    private BrowserFactory() {}
 
     public static WebDriverWrapper getDriver(String browser) {
         if ("FIREFOX".equalsIgnoreCase(browser)) {

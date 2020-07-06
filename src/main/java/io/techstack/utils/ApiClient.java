@@ -11,8 +11,10 @@ import io.restassured.specification.RequestSpecification;
 import io.techstack.dto.User;
 import io.techstack.properties.PropertyReader;
 
-public class Api {
-
+/**
+ * This class provides ability to interact with API REST service
+ */
+public class ApiClient {
     private static final RequestSpecification requestSpecification;
 
     static {
@@ -36,11 +38,12 @@ public class Api {
     public static User addUser(String endpoint, User user) {
         return given().spec(requestSpecification)
                       .body(user)
-                      .request()
+                      .when()
                       .post(endpoint)
                       .then()
                       .assertThat()
                       .statusCode(201)
+                      .and()
                       .extract()
                       .as(User.class);
     }
