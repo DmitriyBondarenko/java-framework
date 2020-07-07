@@ -1,4 +1,4 @@
-Feature: TestFeature
+Feature: Verify Google search
 
   Background:
     Given Google page is opened
