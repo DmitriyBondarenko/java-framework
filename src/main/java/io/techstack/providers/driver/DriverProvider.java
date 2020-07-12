@@ -1,5 +1,6 @@
 package io.techstack.providers.driver;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -80,6 +81,6 @@ public class DriverProvider implements IDriverProvider {
     }
 
     private DriverWrapper createRemoteDriver() {
-        return null;
+        throw new NotImplementedException();
     }
 }

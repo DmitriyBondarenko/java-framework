@@ -1,10 +1,10 @@
 package io.techstack.api;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-
-import io.techstack.utils.PropertyReader;
+import java.net.http.HttpResponse;
 
 public class RestWebClient {
     private HttpClient client;
@@ -12,9 +12,21 @@ public class RestWebClient {
 
     public RestWebClient() {
         client = HttpClient.newHttpClient();
-        request = HttpRequest.newBuilder()
-                             .uri(URI.create(PropertyReader.getProperty("base.uri")))
+    }
+
+    public HttpResponse<?> doPost() throws IOException, InterruptedException {
+        request = HttpRequest.newBuilder(URI.create(""))
+                             .POST(null)
+                             .build();
+
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpResponse<?> doGet() throws IOException, InterruptedException {
+        request = HttpRequest.newBuilder(URI.create(""))
                              .GET()
                              .build();
+
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 }
