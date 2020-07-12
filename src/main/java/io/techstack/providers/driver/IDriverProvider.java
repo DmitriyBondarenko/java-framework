@@ -9,7 +9,5 @@ public interface IDriverProvider {
 
     WebDriver getInstance();
 
-    default void destroy() {
-        getInstance().quit();
-    }
+    void destroy();
 }

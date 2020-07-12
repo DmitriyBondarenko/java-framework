@@ -1,12 +1,13 @@
 package io.techstack.pages.base;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractPage {
-    protected WebDriver driver;
+import io.techstack.providers.driver.DriverWrapper;
 
-    public AbstractPage(WebDriver driver) {
+public abstract class AbstractPage {
+    protected DriverWrapper driver;
+
+    public AbstractPage(DriverWrapper driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

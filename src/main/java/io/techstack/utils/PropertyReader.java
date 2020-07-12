@@ -1,4 +1,4 @@
-package io.techstack.properties;
+package io.techstack.utils;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -14,7 +14,7 @@ public class PropertyReader {
 
             String property = props.getProperty(name);
             if (property == null) {
-                throw new IllegalArgumentException("Could not read property with key: " + name);
+                throw new IllegalArgumentException(String.format("Could not read property with key: %s", name));
             }
             return property;
         } catch (IOException e) {

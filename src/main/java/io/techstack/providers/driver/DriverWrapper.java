@@ -17,16 +17,17 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.List;
 import java.util.Set;
 
-import io.techstack.utils.interfaces.IWait;
+import io.techstack.providers.extensions.PagesProvider;
+import io.techstack.providers.extensions.WaitsProvider;
 
-public class WebDriverWrapper implements WebDriver, IWait, JavascriptExecutor, TakesScreenshot, HasCapabilities {
+public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, JavascriptExecutor, TakesScreenshot, HasCapabilities {
     private final WebDriver webDriver;
 
     private final String uniqueInstanceMarker = RandomStringUtils.randomAlphabetic(20);
     private final String browserName;
     private final String browserVersion;
 
-    public WebDriverWrapper(WebDriver webDriver) {
+    public DriverWrapper(WebDriver webDriver) {
         this.webDriver = webDriver;
         WebDriver capWebDriver = webDriver;
         if (webDriver instanceof WrapsDriver) {
@@ -140,7 +141,7 @@ public class WebDriverWrapper implements WebDriver, IWait, JavascriptExecutor, T
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WebDriverWrapper that = (WebDriverWrapper) o;
+        DriverWrapper that = (DriverWrapper) o;
         return webDriver.equals(that.webDriver);
     }
 

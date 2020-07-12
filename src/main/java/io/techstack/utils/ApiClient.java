@@ -9,14 +9,16 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.techstack.dto.User;
-import io.techstack.properties.PropertyReader;
 
 /**
  * This class provides ability to interact with API REST service
+ * Need to create additional API client for UI usage and API tests
+ * API login
  */
 public class ApiClient {
     private static final RequestSpecification requestSpecification;
 
+    //non-static
     static {
         RestAssured.baseURI = PropertyReader.getProperty("base.uri");
         requestSpecification = new RequestSpecBuilder()
