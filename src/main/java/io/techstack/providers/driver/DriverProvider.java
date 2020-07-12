@@ -66,9 +66,9 @@ public class DriverProvider implements IDriverProvider {
     private DriverWrapper createLocalDriver() {
         return switch (BROWSER) {
             case "chrome" -> {
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("start-maximized");
-                options.addArguments("disable-infobars");
+                ChromeOptions options = new ChromeOptions()
+                        .addArguments("start-maximized")
+                        .addArguments("disable-infobars");
                 WebDriverManager.chromedriver().setup();
                 yield driver = new DriverWrapper(new ChromeDriver(options));
             }
