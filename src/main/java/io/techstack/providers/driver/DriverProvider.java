@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.techstack.utils.PropertyReader;
-import io.techstack.utils.BrowserFactory;
 
 /**
  * This class provides methods to interact with WedDriver instance
