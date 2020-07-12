@@ -15,7 +15,7 @@ import io.techstack.dto.User;
  * Need to create additional API client for UI usage and API tests
  * API login
  */
-public class ApiClient {
+public class ApiHelper {
     private static final RequestSpecification requestSpecification;
 
     //non-static

@@ -28,6 +28,7 @@ public class GoogleSteps {
     @When("User enters search request {string}")
     public void userEntersSearchRequestAutomation(String string) {
         GooglePage googlePage = driver.nowAt(GooglePage.class);
+
         driver.waitForElement(googlePage.searchInput);
         googlePage.searchInput.sendKeys(string);
         googlePage.searchInput.sendKeys(Keys.ENTER);
@@ -36,6 +37,7 @@ public class GoogleSteps {
     @Then("Results page with {string} is displayed")
     public void resultsPageWithRequestIsDisplayed(String string) {
         GooglePage googlePage = driver.nowAt(GooglePage.class);
+
         int results = driver.waitForElements(googlePage.getSearchResults(string)).size();
 
         Assertions.assertThat(results).as("Search results are not valid").isGreaterThan(5);
