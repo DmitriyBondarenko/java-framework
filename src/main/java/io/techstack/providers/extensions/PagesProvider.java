@@ -4,13 +4,15 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
+import io.techstack.pages.base.AbstractPage;
 import io.techstack.providers.driver.DriverWrapper;
 
 public interface PagesProvider {
 
-    default <P> P nowAt(Class<P> pageClass) {
+    default <P extends AbstractPage> P nowAt(Class<P> pageClass) {
         P page =  instantiatePage(pageClass);
         PageFactory.initElements((DriverWrapper) this, page);
+        page.waitForMainPageElement();
         return page;
     }
 

@@ -7,7 +7,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.techstack.dto.User;
-import io.techstack.pages.GooglePage;
+import io.techstack.pages.MainPage;
+import io.techstack.pages.SearchResultsPage;
 import io.techstack.providers.driver.DriverProvider;
 import io.techstack.providers.driver.DriverWrapper;
 
@@ -27,19 +28,17 @@ public class GoogleSteps {
 
     @When("User enters search request {string}")
     public void userEntersSearchRequestAutomation(String string) {
-        GooglePage googlePage = driver.nowAt(GooglePage.class);
+        MainPage mainPage = driver.nowAt(MainPage.class);
 
-        driver.waitForElement(googlePage.searchInput);
-        googlePage.searchInput.sendKeys(string);
-        googlePage.searchInput.sendKeys(Keys.ENTER);
+        mainPage.searchInput.sendKeys(string);
+        mainPage.searchInput.sendKeys(Keys.ENTER);
     }
 
     @Then("Results page with {string} is displayed")
     public void resultsPageWithRequestIsDisplayed(String string) {
-        GooglePage googlePage = driver.nowAt(GooglePage.class);
+        SearchResultsPage searchResultsPage = driver.nowAt(SearchResultsPage.class);
 
-        int results = driver.waitForElements(googlePage.getSearchResults(string)).size();
-
+        int results = driver.waitForElements(searchResultsPage.getSearchResults(string)).size();
         Assertions.assertThat(results).as("Search results are not valid").isGreaterThan(5);
     }
 }
