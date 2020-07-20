@@ -1,17 +1,20 @@
 package io.techstack.providers.driver;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.URI;
 import java.util.Objects;
 import java.util.Optional;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.techstack.utils.PropertyReader;
+import lombok.SneakyThrows;
 
 /**
  * This class provides methods to interact with WedDriver instance
@@ -20,11 +23,13 @@ public class DriverProvider implements IDriverProvider {
     private static final Logger LOGGER = LoggerFactory.getLogger(DriverProvider.class);
     private static final String BROWSER;
     private static final String REMOTE_DRIVER;
+    private static final String HUB_URI;
     private DriverWrapper driver;
 
     static {
         BROWSER = PropertyReader.getProperty("target.browser");
         REMOTE_DRIVER = PropertyReader.getProperty("remote.driver");
+        HUB_URI = PropertyReader.getProperty("hub.uri");
     }
 
     @Override
@@ -80,7 +85,11 @@ public class DriverProvider implements IDriverProvider {
         };
     }
 
+    @SneakyThrows
     private DriverWrapper createRemoteDriver() {
-        throw new NotImplementedException();
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setCapability("sessionTimeout", "10m");
+        desiredCapabilities.setCapability("screenResolution", "1900x2080x24");
+        return new DriverWrapper(new RemoteWebDriver(URI.create(HUB_URI).toURL(), desiredCapabilities));
     }
 }

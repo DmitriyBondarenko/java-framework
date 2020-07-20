@@ -8,6 +8,6 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/java/features",
-        glue = {"io.techstack.steps"})
-public class RunCucumberTest {
-}
+        glue = {"io.techstack.steps"},
+        plugin = {"rerun:target/featuresToReRun.txt"})
+public class CucumberRunner { }
