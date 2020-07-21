@@ -17,6 +17,6 @@ public class MainPage extends AbstractPage {
 
     @Override
     public void waitForMainPageElement() {
-        driver.waitForElement(searchInput);
+        driver.waitForElementToBeDisplayed(searchInput);
     }
 }

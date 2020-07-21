@@ -38,7 +38,7 @@ public class GoogleSteps {
     public void resultsPageWithRequestIsDisplayed(String string) {
         SearchResultsPage searchResultsPage = driver.nowAt(SearchResultsPage.class);
 
-        int results = driver.waitForElements(searchResultsPage.getSearchResults(string)).size();
+        int results = driver.waitForElementsToBeDisplayed(searchResultsPage.getSearchResults(string)).size();
         Assertions.assertThat(results).as("Search results are not valid").isGreaterThan(5);
     }
 }

@@ -20,7 +20,7 @@ public class SearchResultsPage extends AbstractPage {
 
     @Override
     public void waitForMainPageElement() {
-        driver.waitForElement(resultsCountLabel);
+        driver.waitForElementToBeDisplayed(resultsCountLabel);
     }
 
     public List<WebElement> getSearchResults(String request) {
