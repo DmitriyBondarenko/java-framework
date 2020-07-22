@@ -13,26 +13,26 @@ import io.techstack.providers.driver.DriverProvider;
 import io.techstack.utils.PropertyReader;
 
 public class BaseStep {
-    private final DriverProvider driverProvider;
+    private final DriverProvider _driverProvider;
 
     public BaseStep(DriverProvider driverProvider) {
-        this.driverProvider = driverProvider;
+        _driverProvider = driverProvider;
     }
 
     @Before
     public void setUp() {
-       driverProvider.getInstance();
+      DriverProvider.browserList.addDriver(_driverProvider.getInstance());
     }
 
     @After(order = 0)
     public void tearDown() {
-        driverProvider.destroy();
+        _driverProvider.destroy();
     }
 
     @After(order = 1)
     public void takeScreenshotIfFailed(Scenario scenario) {
         if (scenario.isFailed()) {
-            File screenshot = driverProvider.getInstance().getScreenshotAs(OutputType.FILE);
+            File screenshot = _driverProvider.getInstance().getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(screenshot, new File(String.format("%s/%s.png",
                         PropertyReader.getProperty("screenshots.folder"),

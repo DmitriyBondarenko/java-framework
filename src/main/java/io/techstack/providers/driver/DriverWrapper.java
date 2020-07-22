@@ -22,7 +22,6 @@ import io.techstack.providers.extensions.WaitsProvider;
 
 public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, JavascriptExecutor, TakesScreenshot, HasCapabilities {
     private final WebDriver webDriver;
-
     private final String uniqueInstanceMarker = RandomStringUtils.randomAlphabetic(20);
     private final String browserName;
     private final String browserVersion;
@@ -37,10 +36,6 @@ public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, J
         Capabilities caps = ((RemoteWebDriver) capWebDriver).getCapabilities();
         this.browserName = caps.getBrowserName();
         this.browserVersion = caps.getVersion();
-    }
-
-    public WebDriver getWrappedDriver() {
-        return webDriver;
     }
 
     @Override

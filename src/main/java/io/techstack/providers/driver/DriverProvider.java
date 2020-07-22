@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.techstack.utils.BrowserList;
 import io.techstack.utils.PropertyReader;
 import lombok.SneakyThrows;
 
@@ -25,11 +26,13 @@ public class DriverProvider implements IDriverProvider {
     private static final String REMOTE_DRIVER;
     private static final String HUB_URI;
     private DriverWrapper driver;
+    public static BrowserList browserList;
 
     static {
         BROWSER = PropertyReader.getProperty("target.browser");
         REMOTE_DRIVER = PropertyReader.getProperty("remote.driver");
         HUB_URI = PropertyReader.getProperty("hub.uri");
+        browserList = new BrowserList();
     }
 
     @Override
