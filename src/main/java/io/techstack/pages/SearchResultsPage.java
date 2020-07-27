@@ -7,13 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 import io.techstack.pages.base.AbstractPage;
-import io.techstack.providers.driver.DriverWrapper;
 
 public class SearchResultsPage extends AbstractPage {
-
-    public SearchResultsPage(DriverWrapper driver) {
-        super(driver);
-    }
 
     @FindBy(xpath = ".//div[@id = 'result-stats']")
     public WebElement resultsCountLabel;

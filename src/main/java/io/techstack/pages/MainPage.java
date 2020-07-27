@@ -8,10 +8,6 @@ import io.techstack.providers.driver.DriverWrapper;
 
 public class MainPage extends AbstractPage {
 
-    public MainPage(DriverWrapper driver) {
-        super(driver);
-    }
-
     @FindBy(xpath = ".//input[@name = 'q']")
     public WebElement searchInput;
 

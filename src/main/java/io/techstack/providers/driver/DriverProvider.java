@@ -8,14 +8,14 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.techstack.utils.BrowserList;
 import io.techstack.utils.PropertyReader;
-import lombok.SneakyThrows;
 
 /**
  * This class provides methods to interact with WedDriver instance
@@ -26,13 +26,11 @@ public class DriverProvider implements IDriverProvider {
     private static final String REMOTE_DRIVER;
     private static final String HUB_URI;
     private DriverWrapper driver;
-    public static BrowserList browserList;
 
     static {
         BROWSER = PropertyReader.getProperty("target.browser");
         REMOTE_DRIVER = PropertyReader.getProperty("remote.driver");
         HUB_URI = PropertyReader.getProperty("hub.uri");
-        browserList = new BrowserList();
     }
 
     @Override
@@ -88,11 +86,16 @@ public class DriverProvider implements IDriverProvider {
         };
     }
 
-    @SneakyThrows
     private DriverWrapper createRemoteDriver() {
+        URL url = null;
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("sessionTimeout", "10m");
         desiredCapabilities.setCapability("screenResolution", "1900x2080x24");
-        return new DriverWrapper(new RemoteWebDriver(URI.create(HUB_URI).toURL(), desiredCapabilities));
+        try {
+            url = URI.create(HUB_URI).toURL();
+        } catch (MalformedURLException ex) {
+            ex.printStackTrace();
+        }
+        return new DriverWrapper(new RemoteWebDriver(url, desiredCapabilities));
     }
 }

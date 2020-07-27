@@ -20,8 +20,8 @@ public class BrowserList {
     public DriverWrapper getBrowser(int id) {
         driverInUse = null;
 
-        if (id > _drivers.size() - 1) {
-            throw new RuntimeException(String.format("Unable to get driver with %d id", id));
+        if (id > _drivers.size()) {
+            throw new RuntimeException(String.format("Unable to get driver with '%d' id", id));
         }
 
         //Set new current driver
@@ -30,6 +30,7 @@ public class BrowserList {
         //Start ping thread if not yet started
         if (_pingDriversThread == null) {
             _pingDriversThread = new Thread(this::pingDrivers);
+            _pingDriversThread.start();
         }
         return driverInUse;
     }
@@ -44,7 +45,9 @@ public class BrowserList {
     }
 
     public List<DriverWrapper> getAllBrowsers() {
-        _pingDriversThread.interrupt();
+        if (_pingDriversThread != null) {
+            _pingDriversThread.interrupt();
+        }
         return _drivers;
     }
 

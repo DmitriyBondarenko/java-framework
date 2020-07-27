@@ -13,15 +13,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import io.techstack.providers.extensions.PagesProvider;
+import io.techstack.providers.extensions.UtilsProvider;
 import io.techstack.providers.extensions.WaitsProvider;
 
-public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, JavascriptExecutor, TakesScreenshot, HasCapabilities {
-    private final WebDriver webDriver;
+public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, UtilsProvider, JavascriptExecutor,
+        TakesScreenshot, HasCapabilities {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DriverWrapper.class);
+    private WebDriver webDriver;
     private final String uniqueInstanceMarker = RandomStringUtils.randomAlphabetic(20);
     private final String browserName;
     private final String browserVersion;
@@ -74,7 +80,7 @@ public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, J
     }
 
     @Override
-    public void quit() {
+    public final void quit() {
         webDriver.quit();
     }
 
@@ -138,6 +144,33 @@ public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, J
         if (o == null || getClass() != o.getClass()) return false;
         DriverWrapper that = (DriverWrapper) o;
         return webDriver.equals(that.webDriver);
+    }
+
+    public void navigateToUrl(String url)
+    {
+        LOGGER.info(String.format("Navigating to the %s", url));
+        webDriver.navigate().to(url);
+    }
+
+    public void quiteDriver() {
+        if (Objects.nonNull(webDriver)) {
+            try {
+                webDriver.manage().deleteAllCookies();
+            } catch (Exception ex) {
+                LOGGER.error(String.format("An exception occurred while cookies deleting: %s", ex));
+            }
+            try {
+                webDriver.close();
+            } catch (Exception ex) {
+                LOGGER.error(String.format("An exception occurred while closing the driver: %s", ex));
+            }
+            try {
+                webDriver.quit();
+            } catch (Exception ex) {
+                LOGGER.error(String.format("An exception occurred while quiting the driver: %s", ex));
+            }
+            webDriver = null;
+        }
     }
 
     public String getBrowserName() {
