@@ -12,7 +12,7 @@ import io.cucumber.java.Scenario;
 import io.techstack.providers.driver.DriverProvider;
 import io.techstack.providers.driver.DriverWrapper;
 import io.techstack.utils.BrowserList;
-import io.techstack.utils.PropertyReader;
+import io.techstack.utils.FileHelper;
 
 public class BaseStep {
     private final BrowserList _browserList;
@@ -30,18 +30,16 @@ public class BaseStep {
 
     @After(order = 0)
     public void tearDown() {
-        _browserList.getAllBrowsers().forEach(DriverWrapper::quiteDriver);
+        _browserList.closeAllBrowsers();
     }
 
-    @After(order = 1)
+    @After()
     public void takeScreenshotIfFailed(Scenario scenario) {
         if (scenario.isFailed()) {
-            for (DriverWrapper driver : _browserList.getAllBrowsers()) {
+            for (DriverWrapper driver : _browserList._driversList) {
                 File screenshot = driver.getScreenshotAs(OutputType.FILE);
                 try {
-                    FileUtils.copyFile(screenshot, new File(String.format("%s/%s.png",
-                            PropertyReader.getProperty("screenshots.folder"),
-                            scenario.getName())));
+                    FileUtils.copyFile(screenshot, FileHelper.createUniqueScreenshotName(scenario.getName()));
                 } catch (IOException e) {
                     throw new RuntimeException(String.format("Unable to create a screenshot. %s", e.getMessage()));
                 }

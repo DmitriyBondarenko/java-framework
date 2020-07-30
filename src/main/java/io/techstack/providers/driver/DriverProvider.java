@@ -39,33 +39,12 @@ public class DriverProvider implements IDriverProvider {
     }
 
     @Override
-    public void destroy() {
-        if (Objects.nonNull(driver)) {
-            try {
-                driver.manage().deleteAllCookies();
-            } catch (Exception ex) {
-                LOGGER.error(String.format("An exception occurred while cookies deleting: %s", ex));
-            }
-            try {
-                driver.close();
-            } catch (Exception ex) {
-                LOGGER.error(String.format("An exception occurred while closing the driver: %s", ex));
-            }
-            try {
-                driver.quit();
-            } catch (Exception ex) {
-                LOGGER.error(String.format("An exception occurred while quiting the driver: %s", ex));
-            }
-            driver = null;
-        }
-    }
-
-    private DriverWrapper createDriverInstance() {
+    public DriverWrapper createDriverInstance() {
         return switch (REMOTE_DRIVER) {
             case "local" -> createLocalDriver();
             case "remote" -> createRemoteDriver();
-            default -> throw new RuntimeException(String.format("Incorrect parameter type for remote/local driver: " +
-                    "%s", REMOTE_DRIVER));
+            default -> throw new RuntimeException(String.format("Incorrect parameter type for remote/local driver: %s",
+                    REMOTE_DRIVER));
         };
     }
 

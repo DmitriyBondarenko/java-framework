@@ -56,22 +56,18 @@ public interface UtilsProvider {
     }
 
     default void checkCheckBox(WebElement checkbox) {
-        if (!checkbox.isSelected())
-            checkbox.click();
+        setCheckboxState(checkbox, true);
     }
 
     default void uncheckCheckBox(WebElement checkbox) {
-        if (checkbox.isSelected())
-            checkbox.click();
+        setCheckboxState(checkbox, false);
     }
 
     default void setCheckboxState(WebElement checkbox, boolean desiredState) {
-        if (desiredState) {
-            if (!checkbox.isSelected())
-                checkbox.click();
-        } else {
-            if (checkbox.isSelected())
-                checkbox.click();
+        if (desiredState && !checkbox.isSelected()) {
+            checkbox.click();
+        } else if (!desiredState && checkbox.isSelected()) {
+            checkbox.click();
         }
     }
     //endregion

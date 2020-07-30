@@ -6,9 +6,9 @@ import com.google.common.base.MoreObjects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
-    private String firstName;
-    private String lastName;
-    private int id;
+    public String firstName;
+    public String lastName;
+    public int id;
 
     @Override
     public String toString() {

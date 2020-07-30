@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import io.techstack.providers.driver.DriverWrapper;
 
 public class BrowserList {
-    private final List<DriverWrapper> _drivers = new ArrayList<>();
+    public final List<DriverWrapper> _driversList = new ArrayList<>();
     private Thread _pingDriversThread = null;
     private DriverWrapper driverInUse;
 
@@ -20,12 +20,12 @@ public class BrowserList {
     public DriverWrapper getBrowser(int id) {
         driverInUse = null;
 
-        if (id > _drivers.size()) {
+        if (id > _driversList.size()) {
             throw new RuntimeException(String.format("Unable to get driver with '%d' id", id));
         }
 
         //Set new current driver
-        driverInUse = _drivers.get(id);
+        driverInUse = _driversList.get(id);
 
         //Start ping thread if not yet started
         if (_pingDriversThread == null) {
@@ -36,26 +36,26 @@ public class BrowserList {
     }
 
     public void addDriver(DriverWrapper driver) {
-        _drivers.add(driver);
+        _driversList.add(driver);
 
         //First browser that was added will be main in focus
-        if (_drivers.size() == 1) {
+        if (_driversList.size() == 1) {
             driverInUse = driver;
         }
     }
 
-    public List<DriverWrapper> getAllBrowsers() {
+    public void closeAllBrowsers() {
         if (_pingDriversThread != null) {
             _pingDriversThread.interrupt();
         }
-        return _drivers;
+        _driversList.forEach(DriverWrapper::quiteDriver);
     }
 
     private void pingDrivers() {
         try {
-            List<DriverWrapper> driversForPing = _drivers.stream()
-                                                         .filter(x -> !x.equals(driverInUse))
-                                                         .collect(Collectors.toList());
+            List<DriverWrapper> driversForPing = _driversList.stream()
+                                                             .filter(x -> !x.equals(driverInUse))
+                                                             .collect(Collectors.toList());
 
             for (DriverWrapper driver : driversForPing) {
                 try {
@@ -64,7 +64,7 @@ public class BrowserList {
                     e.printStackTrace();
                 }
             }
-            Thread.sleep(20000);
+            Thread.sleep(15000);
         } catch (Exception e) {
             e.printStackTrace();
         }
