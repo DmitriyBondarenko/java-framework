@@ -1,4 +1,4 @@
-package io.techstack.providers.extensions;
+package io.techstack.extensions;
 
 import org.openqa.selenium.support.PageFactory;
 

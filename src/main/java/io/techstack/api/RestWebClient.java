@@ -1,65 +1,85 @@
 package io.techstack.api;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.net.URI;
+import java.net.Authenticator;
+import java.net.CookieHandler;
+import java.net.ProxySelector;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
-import javax.swing.text.html.HTMLDocument;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
 
-import io.techstack.dto.AuthObject;
+public class RestWebClient extends HttpClient {
 
-public class RestWebClient {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RestWebClient.class);
-    private HttpClient client;
-    private HttpRequest request;
-
-    public RestWebClient() {
-        client = HttpClient.newHttpClient();
+    @Override
+    public Optional<CookieHandler> cookieHandler() {
+        return Optional.empty();
     }
 
-    public HttpResponse<?> doPost() throws IOException, InterruptedException {
-        request = HttpRequest.newBuilder(URI.create(""))
-                             .POST(null)
-                             .build();
-
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    @Override
+    public Optional<Duration> connectTimeout() {
+        return Optional.empty();
     }
 
-    public HttpResponse<?> doGet() throws IOException, InterruptedException {
-        request = HttpRequest.newBuilder(URI.create(""))
-                             .GET()
-                             .build();
-
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    @Override
+    public Redirect followRedirects() {
+        return null;
     }
 
-    public AuthObject getAuthenticationDetails(String url) {
-        var clientBaseUrl = URI.create(url);
+    @Override
+    public Optional<ProxySelector> proxy() {
+        return Optional.empty();
+    }
 
-        var doc = new HTMLDocument();
+    @Override
+    public SSLContext sslContext() {
+        return null;
+    }
 
-        int attempts = 2;
-        var html = StringUtils.EMPTY;
-        while (attempts > 0) {
-            var request = HttpRequest.newBuilder(clientBaseUrl).GET().build();
-            HttpResponse<Object> response = null;
-            try {
-                response = client.send(request, null);
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (response.statusCode() != HttpStatus.SC_OK)
-                LOGGER.error(String.format("Automation server is not responding: %s", response.statusCode()));
-            response.body();
-            attempts--;
-        }
-        return new AuthObject();
+    @Override
+    public SSLParameters sslParameters() {
+        return null;
+    }
+
+    @Override
+    public Optional<Authenticator> authenticator() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Version version() {
+        return null;
+    }
+
+    @Override
+    public Optional<Executor> executor() {
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> HttpResponse<T> send(
+            HttpRequest request,
+            HttpResponse.BodyHandler<T> responseBodyHandler) throws IOException, InterruptedException {
+        return null;
+    }
+
+    @Override
+    public <T> CompletableFuture<HttpResponse<T>> sendAsync(
+            HttpRequest request, HttpResponse.BodyHandler<T> responseBodyHandler) {
+        return null;
+    }
+
+    @Override
+    public <T> CompletableFuture<HttpResponse<T>> sendAsync(
+            HttpRequest request,
+            HttpResponse.BodyHandler<T> responseBodyHandler,
+            HttpResponse.PushPromiseHandler<T> pushPromiseHandler) {
+        return null;
     }
 }

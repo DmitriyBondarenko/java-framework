@@ -9,7 +9,6 @@ import io.cucumber.java.en.When;
 import io.techstack.dto.UserDto;
 import io.techstack.pages.MainPage;
 import io.techstack.pages.SearchResultsPage;
-import io.techstack.providers.driver.DriverProvider;
 import io.techstack.providers.driver.DriverWrapper;
 import io.techstack.utils.BrowserList;
 

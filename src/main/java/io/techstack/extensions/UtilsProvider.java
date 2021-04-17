@@ -1,4 +1,4 @@
-package io.techstack.providers.extensions;
+package io.techstack.extensions;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.NoSuchElementException;

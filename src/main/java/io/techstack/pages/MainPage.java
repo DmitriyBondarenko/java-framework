@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import io.techstack.pages.base.AbstractPage;
-import io.techstack.providers.driver.DriverWrapper;
 
 public class MainPage extends AbstractPage {
 

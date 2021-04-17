@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import io.techstack.providers.extensions.PagesProvider;
-import io.techstack.providers.extensions.UtilsProvider;
-import io.techstack.providers.extensions.WaitsProvider;
+import io.techstack.extensions.PagesProvider;
+import io.techstack.extensions.UtilsProvider;
+import io.techstack.extensions.WaitsProvider;
 
 public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, UtilsProvider, JavascriptExecutor,
         TakesScreenshot, HasCapabilities {
@@ -171,13 +171,5 @@ public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, U
             }
             webDriver = null;
         }
-    }
-
-    public String getBrowserName() {
-        return browserName;
-    }
-
-    public String getBrowserVersion() {
-        return browserVersion;
     }
 }
