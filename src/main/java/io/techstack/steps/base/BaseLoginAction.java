@@ -1,7 +1,9 @@
 package io.techstack.steps.base;
 
 import org.apache.http.client.utils.URIBuilder;
+import org.openqa.selenium.Cookie;
 
+import java.net.HttpCookie;
 import java.net.URI;
 import java.net.http.HttpClient.Version;
 import java.net.http.HttpRequest;
@@ -33,6 +35,14 @@ public class BaseLoginAction {
 
             var request = HttpRequest.newBuilder(uri).POST(BodyPublishers.noBody()).build();
             var response = client.send(request, BodyHandlers.ofString());
+
+            var cookieList = response.headers().allValues("set-cookie");
+
+            for (String cookie : cookieList) {
+                var httpCookie = HttpCookie.parse(cookie).stream().findFirst().orElseThrow();
+                Cookie driverCookie = new Cookie(httpCookie.getName(), httpCookie.getValue());
+                driver.manage().addCookie(driverCookie);
+            }
         } catch (Exception ex) {
             throw new RuntimeException(String.format("Unable to Login via API: %s", ex.getMessage()));
         }

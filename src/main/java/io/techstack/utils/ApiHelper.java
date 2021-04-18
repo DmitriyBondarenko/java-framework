@@ -10,9 +10,6 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.techstack.dto.UserDto;
 
-/**
- * This class provides ability to interact with API REST service
- */
 public class ApiHelper {
     private static final RequestSpecification requestSpecification;
 

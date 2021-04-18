@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.Optional;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.techstack.providers.driver.interfaces.IDriverProvider;
 import io.techstack.utils.PropertyReader;
 
 /**

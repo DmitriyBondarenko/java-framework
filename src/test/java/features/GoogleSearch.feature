@@ -1,7 +1,6 @@
 Feature: Verify Google search
 
   Background:
-    Given User is logged in via API
     Given Google page is opened
 
   Scenario: CheckSimpleSearch
