@@ -1,4 +1,4 @@
-package io.techstack.steps;
+package io.techstack.steps.app;
 
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
@@ -6,7 +6,8 @@ import org.openqa.selenium.Keys;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.techstack.dto.UserDto;
+import io.techstack.api.RestWebClient;
+import io.techstack.components.Button;
 import io.techstack.pages.MainPage;
 import io.techstack.pages.SearchResultsPage;
 import io.techstack.providers.driver.DriverWrapper;
@@ -15,12 +16,10 @@ import io.techstack.utils.BrowserList;
 public class GoogleSteps {
     private DriverWrapper _driver;
     private final BrowserList _browserList;
-    private final UserDto _user;
 
-    public GoogleSteps(BrowserList browserList, UserDto userDto) {
+    public GoogleSteps(BrowserList browserList, RestWebClient webClient) {
         _driver = browserList.getBrowser();
         _browserList = browserList;
-        _user = userDto;
     }
 
     @Given("Google page is opened")
@@ -30,6 +29,7 @@ public class GoogleSteps {
 
     @When("User enters search request {string}")
     public void userEntersSearchRequestAutomation(String string) {
+        var button1 = _driver.getComponent(Button.class, "Пошук Google");
         var mainPage = _driver.nowAt(MainPage.class);
 
         mainPage.searchInput.sendKeys(string);

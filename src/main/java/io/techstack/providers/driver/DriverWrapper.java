@@ -20,11 +20,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import io.techstack.extensions.ComponentsProvider;
 import io.techstack.extensions.PagesProvider;
 import io.techstack.extensions.UtilsProvider;
 import io.techstack.extensions.WaitsProvider;
 
-public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, UtilsProvider, JavascriptExecutor,
+public class DriverWrapper implements WebDriver, WaitsProvider, PagesProvider, ComponentsProvider, UtilsProvider, JavascriptExecutor,
         TakesScreenshot, HasCapabilities {
     private static final Logger LOGGER = LoggerFactory.getLogger(DriverWrapper.class);
     private WebDriver webDriver;

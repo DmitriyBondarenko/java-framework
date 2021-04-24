@@ -1,26 +1,26 @@
-package io.techstack.steps;
+package io.techstack.steps.app.login;
 
 import io.cucumber.java.en.Given;
 import io.techstack.api.RestWebClient;
 import io.techstack.dto.UserDto;
 import io.techstack.providers.driver.DriverWrapper;
-import io.techstack.steps.base.BaseLoginAction;
 import io.techstack.utils.BrowserList;
 
 public class LoginSteps extends BaseLoginAction {
     private DriverWrapper _driver;
     private final BrowserList _browserList;
-    private final UserDto _user;
+    private RestWebClient _webClient;
 
-    public LoginSteps(BrowserList browserList, UserDto userDto, RestWebClient webClient) {
-        super(webClient, userDto);
+    public LoginSteps(BrowserList browserList, RestWebClient webClient) {
+        super(webClient);
         _driver = browserList.getBrowser();
         _browserList = browserList;
-        _user = userDto;
+        _webClient = webClient;
     }
 
     @Given("User is logged in via API")
     public void userIsLoggedInToTheApplication() {
-        loginViaApiUser(_driver, _user);
+        var user = new UserDto().setLogin("admin").setPassword("m!gration");
+        loginViaApiUser(_driver, user);
     }
 }

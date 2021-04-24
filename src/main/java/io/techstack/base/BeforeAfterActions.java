@@ -1,4 +1,4 @@
-package io.techstack.steps.base;
+package io.techstack.base;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -14,11 +14,11 @@ import io.techstack.providers.driver.DriverWrapper;
 import io.techstack.utils.BrowserList;
 import io.techstack.utils.FileHelper;
 
-public class BaseStep {
+public class BeforeAfterActions {
     private final BrowserList _browserList;
     private final DriverProvider _driverProvider;
 
-    public BaseStep(BrowserList browserList, DriverProvider driverProvider) {
+    public BeforeAfterActions(BrowserList browserList, DriverProvider driverProvider) {
         _browserList = browserList;
         _driverProvider = driverProvider;
     }

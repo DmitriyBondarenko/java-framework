@@ -17,6 +17,12 @@ import javax.net.ssl.SSLParameters;
 
 public class RestWebClient extends HttpClient {
 
+    public HttpClient appClient;
+
+    public RestWebClient() {
+        appClient = HttpClient.newBuilder().version(Version.HTTP_1_1).build();
+    }
+
     @Override
     public Optional<CookieHandler> cookieHandler() {
         return Optional.empty();

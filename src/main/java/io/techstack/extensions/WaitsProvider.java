@@ -18,6 +18,10 @@ public interface WaitsProvider extends WebDriver {
         return new WebDriverWait(WaitsProvider.this, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOf(element));
     }
 
+    default WebElement waitForElementToBeDisplayed(By locator) {
+        return new WebDriverWait(WaitsProvider.this, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
     default void waitForElementToBeNotDisplayed(WebElement element) {
         new WebDriverWait(WaitsProvider.this, DEFAULT_TIMEOUT).until(ExpectedConditions.invisibilityOf(element));
     }

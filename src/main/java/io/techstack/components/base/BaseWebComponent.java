@@ -20,6 +20,8 @@ public abstract class BaseWebComponent implements IWebComponent, IContextContain
     protected By parentSelector;
     protected WebElement parent;
 
-    public void build() { }
+    public void build() {
+        instance = driver.waitForElementToBeDisplayed(construct());
+    }
     protected abstract By construct();
 }

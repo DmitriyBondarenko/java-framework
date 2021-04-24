@@ -8,7 +8,7 @@ public class Button extends BaseWebComponent {
 
     @Override
     protected By construct() {
-        var selector = String.format("(.//input[@aria-label = '%s'])[2]", identifier);
+        var selector = String.format(".//input[@value = '%s']", identifier);
         return By.xpath(selector);
     }
 }
