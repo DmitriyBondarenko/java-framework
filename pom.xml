@@ -30,7 +30,7 @@
     <properties>
         <selenium.version>3.141.59</selenium.version>
         <cucumber.version>6.10.3</cucumber.version>
-        <assertj.version>3.19.0</assertj.version>
+        <assertj.version>3.27.7</assertj.version>
         <webdrivermanager.version>4.4.0</webdrivermanager.version>
         <cucumber-picocontainer.version>6.10.3</cucumber-picocontainer.version>
         <rest-assured.version>4.3.3</rest-assured.version>
